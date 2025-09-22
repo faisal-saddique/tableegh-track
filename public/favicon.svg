@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#059669" stroke="#047857" stroke-width="2"/>
+
+  <!-- Mosque dome -->
+  <ellipse cx="16" cy="18" rx="8" ry="5" fill="#ffffff"/>
+
+  <!-- Mosque base -->
+  <rect x="10" y="18" width="12" height="8" fill="#ffffff"/>
+
+  <!-- Minaret -->
+  <rect x="8" y="10" width="2" height="12" fill="#ffffff"/>
+  <rect x="22" y="10" width="2" height="12" fill="#ffffff"/>
+
+  <!-- Crescent moon -->
+  <path d="M16 5 C18 5, 19 7, 18 9 C17 7, 16 5, 16 5 Z" fill="#ffffff"/>
+
+  <!-- Small star -->
+  <circle cx="18" cy="7" r="0.5" fill="#ffffff"/>
+</svg>
