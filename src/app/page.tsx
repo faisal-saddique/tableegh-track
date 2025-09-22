@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { auth } from "~/server/auth";
-import { api, HydrateClient } from "~/trpc/server";
+import { HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
   const session = await auth();
@@ -150,10 +150,10 @@ export default async function Home() {
 
               <div className="bg-white rounded-xl p-8 shadow-lg">
                 <div className="text-2xl text-emerald-600 mb-4 font-arabic">
-                  "وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ وَرَسُولُهُ وَالْمُؤْمِنُونَ"
+                  &ldquo;وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ وَرَسُولُهُ وَالْمُؤْمِنُونَ&rdquo;
                 </div>
                 <p className="text-gray-600 italic">
-                  "And say: Work, so Allah will see your work and His messenger and the believers."
+                  &ldquo;And say: Work, so Allah will see your work and His messenger and the believers.&rdquo;
                 </p>
                 <p className="text-sm text-gray-500 mt-2">At-Tawbah 9:105</p>
               </div>

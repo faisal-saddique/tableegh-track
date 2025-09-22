@@ -13,9 +13,9 @@ export default function SignIn() {
 
   useEffect(() => {
     // Check if user is already signed in
-    getSession().then((session) => {
+    void getSession().then((session) => {
       if (session) {
-        router.push("/dashboard");
+        void router.push("/dashboard");
       }
     });
   }, [router]);
@@ -35,9 +35,9 @@ export default function SignIn() {
       if (result?.error) {
         setError("Invalid username/email or password");
       } else if (result?.ok) {
-        router.push("/dashboard");
+        void router.push("/dashboard");
       }
-    } catch (error) {
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
@@ -117,10 +117,10 @@ export default function SignIn() {
 
         <div className="text-center space-y-2">
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-            "وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ وَرَسُولُهُ وَالْمُؤْمِنُونَ"
+            &ldquo;وَقُلِ اعْمَلُوا فَسَيَرَى اللَّهُ عَمَلَكُمْ وَرَسُولُهُ وَالْمُؤْمِنُونَ&rdquo;
           </p>
           <p className="text-xs text-gray-500">
-            "And say: Work, so Allah will see your work and His messenger and the believers."
+            &ldquo;And say: Work, so Allah will see your work and His messenger and the believers.&rdquo;
           </p>
         </div>
       </div>

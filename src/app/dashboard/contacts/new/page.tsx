@@ -11,7 +11,7 @@ export default function NewContactPage() {
   const { data: blocks, isLoading: blocksLoading } = api.block.getAll.useQuery();
   const createContact = api.contact.create.useMutation({
     onSuccess: () => {
-      router.push("/dashboard/contacts");
+      void router.push("/dashboard/contacts");
     },
   });
 
@@ -22,13 +22,13 @@ export default function NewContactPage() {
     const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name") as string,
-      fatherName: formData.get("fatherName") as string || undefined,
-      phoneNumber: formData.get("phoneNumber") as string || undefined,
-      houseNumber: formData.get("houseNumber") as string || undefined,
-      address: formData.get("address") as string || undefined,
-      occupation: formData.get("occupation") as string || undefined,
-      timings: formData.get("timings") as string || undefined,
-      notes: formData.get("notes") as string || undefined,
+      fatherName: (formData.get("fatherName") as string) || undefined,
+      phoneNumber: (formData.get("phoneNumber") as string) || undefined,
+      houseNumber: (formData.get("houseNumber") as string) || undefined,
+      address: (formData.get("address") as string) || undefined,
+      occupation: (formData.get("occupation") as string) || undefined,
+      timings: (formData.get("timings") as string) || undefined,
+      notes: (formData.get("notes") as string) || undefined,
       isMuslim: formData.get("isMuslim") === "on",
       isInterested: formData.get("isInterested") === "on",
       blockId: formData.get("blockId") as string,
@@ -75,7 +75,7 @@ export default function NewContactPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Father's Name
+                Father&rsquo;s Name
               </label>
               <input
                 type="text"

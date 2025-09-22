@@ -10,17 +10,17 @@ export default function NewVisitPage() {
   const preselectedContactId = searchParams.get("contactId");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedContactId, setSelectedContactId] = useState(preselectedContactId || "");
+  const [selectedContactId, setSelectedContactId] = useState(preselectedContactId ?? "");
   const [selectedBlockId, setSelectedBlockId] = useState("");
 
   const { data: blocks, isLoading: blocksLoading } = api.block.getAll.useQuery();
   const { data: contacts, isLoading: contactsLoading } = api.contact.getAll.useQuery({
-    blockId: selectedBlockId || undefined,
+    blockId: selectedBlockId ?? undefined,
   });
 
   const createVisit = api.visit.create.useMutation({
     onSuccess: () => {
-      router.push("/dashboard/visits");
+      void router.push("/dashboard/visits");
     },
   });
 
@@ -52,14 +52,14 @@ export default function NewVisitPage() {
 
     const data = {
       contactId: selectedContactId,
-      blockId: selectedContact?.blockId || selectedBlockId,
+      blockId: selectedContact?.blockId ?? selectedBlockId,
       visitDate,
       purpose: formData.get("purpose") as string,
-      response: formData.get("response") as string || undefined,
+      response: (formData.get("response") as string) || undefined,
       duration: formData.get("duration") ? parseInt(formData.get("duration") as string) : undefined,
       followUpNeeded: formData.get("followUpNeeded") === "on",
       followUpDate: formData.get("followUpDate") ? new Date(formData.get("followUpDate") as string) : undefined,
-      notes: formData.get("notes") as string || undefined,
+      notes: (formData.get("notes") as string) || undefined,
     };
 
     try {

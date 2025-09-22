@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import type { RouterOutputs } from "~/trpc/react";
 
-function BlockCard({ block }: { block: any }) {
+type Block = RouterOutputs["block"]["getAll"][0];
+
+function BlockCard({ block }: { block: Block }) {
   return (
     <Link
       href={`/dashboard/blocks/${block.id}`}
@@ -109,19 +112,19 @@ export default function BlocksPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div className="text-center p-3 sm:p-4 bg-emerald-50 rounded-lg">
             <div className="text-lg sm:text-2xl font-bold text-emerald-600">
-              {blocks?.reduce((sum, block) => sum + block._count.people, 0) || 0}
+              {blocks?.reduce((sum, block) => sum + block._count.people, 0) ?? 0}
             </div>
             <div className="text-xs sm:text-sm text-emerald-600">Total Contacts</div>
           </div>
           <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-lg">
             <div className="text-lg sm:text-2xl font-bold text-blue-600">
-              {blocks?.reduce((sum, block) => sum + block._count.visits, 0) || 0}
+              {blocks?.reduce((sum, block) => sum + block._count.visits, 0) ?? 0}
             </div>
             <div className="text-xs sm:text-sm text-blue-600">Total Visits</div>
           </div>
           <div className="text-center p-3 sm:p-4 bg-purple-50 rounded-lg">
             <div className="text-lg sm:text-2xl font-bold text-purple-600">
-              {blocks?.length || 0}
+              {blocks?.length ?? 0}
             </div>
             <div className="text-xs sm:text-sm text-purple-600">Active Blocks</div>
           </div>

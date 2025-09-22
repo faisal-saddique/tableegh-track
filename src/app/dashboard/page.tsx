@@ -187,7 +187,7 @@ function FollowUpReminders() {
 }
 
 export default function Dashboard() {
-  const { data: stats, isLoading: statsLoading } = api.contact.getStats.useQuery();
+  const { data: stats } = api.contact.getStats.useQuery();
 
   return (
     <div className="space-y-4 sm:space-y-6">

@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { api } from "~/trpc/react";
+import type { RouterOutputs } from "~/trpc/react";
 
-function ContactHeader({ contact }: { contact: any }) {
+type ContactDetail = RouterOutputs["contact"]["getById"];
+
+function ContactHeader({ contact }: { contact: NonNullable<ContactDetail> }) {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <div className="flex justify-between items-start">
@@ -45,7 +48,7 @@ function ContactHeader({ contact }: { contact: any }) {
   );
 }
 
-function ContactDetails({ contact }: { contact: any }) {
+function ContactDetails({ contact }: { contact: NonNullable<ContactDetail> }) {
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Details</h2>
@@ -89,7 +92,7 @@ function ContactDetails({ contact }: { contact: any }) {
           )}
           <div>
             <label className="block text-sm font-medium text-gray-500">Added By</label>
-            <p className="text-gray-900">{contact.createdBy.name || contact.createdBy.email}</p>
+            <p className="text-gray-900">{contact.createdBy.name ?? contact.createdBy.email}</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-500">Added On</label>
@@ -107,7 +110,7 @@ function ContactDetails({ contact }: { contact: any }) {
   );
 }
 
-function VisitHistory({ contact }: { contact: any }) {
+function VisitHistory({ contact }: { contact: NonNullable<ContactDetail> }) {
   if (!contact.visits || contact.visits.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow p-6">
@@ -143,14 +146,14 @@ function VisitHistory({ contact }: { contact: any }) {
         </Link>
       </div>
       <div className="space-y-4">
-        {contact.visits.map((visit: any) => (
+        {contact.visits.map((visit) => (
           <div key={visit.id} className="border border-gray-200 rounded-lg p-4">
             <div className="flex justify-between items-start mb-2">
               <div>
                 <h3 className="font-medium text-gray-900">{visit.purpose}</h3>
                 <p className="text-sm text-gray-500">
                   {new Date(visit.visitDate).toLocaleDateString()} •{" "}
-                  {visit.createdBy.name || visit.createdBy.email}
+                  {visit.createdBy.name ?? visit.createdBy.email}
                 </p>
               </div>
               {visit.duration && (

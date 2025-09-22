@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import type { RouterOutputs } from "~/trpc/react";
 
-function VisitCard({ visit }: { visit: any }) {
+type Visit = RouterOutputs["visit"]["getAll"]["visits"][0];
+
+function VisitCard({ visit }: { visit: Visit }) {
   const visitDate = new Date(visit.visitDate);
   const isToday = visitDate.toDateString() === new Date().toDateString();
   const isThisWeek = (Date.now() - visitDate.getTime()) < (7 * 24 * 60 * 60 * 1000);
@@ -44,7 +47,7 @@ function VisitCard({ visit }: { visit: any }) {
 
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
         <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500">
-          <span className="truncate">{visit.createdBy.name || visit.createdBy.email}</span>
+          <span className="truncate">{visit.createdBy.name ?? visit.createdBy.email}</span>
           {visit.duration && <span className="whitespace-nowrap">{visit.duration} mins</span>}
           {visit.followUpNeeded && (
             <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full whitespace-nowrap">
@@ -69,8 +72,8 @@ export default function VisitsPage() {
 
   const { data: blocks } = api.block.getAll.useQuery();
   const { data: visitsData, isLoading } = api.visit.getAll.useQuery({
-    blockId: selectedBlock || undefined,
-    purpose: selectedPurpose || undefined,
+    blockId: selectedBlock ?? undefined,
+    purpose: selectedPurpose ?? undefined,
   });
 
   const purposes = [

@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import type { RouterOutputs } from "~/trpc/react";
 
-function ContactCard({ contact }: { contact: any }) {
+type Contact = RouterOutputs["contact"]["getAll"]["contacts"][0];
+
+function ContactCard({ contact }: { contact: Contact }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border p-4 hover:shadow-md transition-all duration-200">
       <div className="flex justify-between items-start mb-3">
@@ -88,8 +91,8 @@ export default function ContactsPage() {
 
   const { data: blocks } = api.block.getAll.useQuery();
   const { data: contactsData, isLoading } = api.contact.getAll.useQuery({
-    search: search || undefined,
-    blockId: selectedBlock || undefined,
+    search: search ?? undefined,
+    blockId: selectedBlock ?? undefined,
   });
 
   return (
